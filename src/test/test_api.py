@@ -26,14 +26,17 @@ def test_health_check():
     assert response.status_code == 200
 
 def test_predict():
-    # Remplacez ces clés par les champs exacts définis dans le schéma Pydantic de votre app.py
     payload = {
-        "air_temperature": 298.1,
-        "process_temperature": 308.6,
-        "rotational_speed": 1500,
-        "torque": 40.0,
-        "tool_wear": 5
+        "temperature_celsius": 25.5,
+        "vibration_mm_s": 1.2,
+        "pressure_psi": 101.3,
+        "operating_hours": 150.0,
+        "temp_roll_mean_3h": 25.1,
+        "vib_roll_mean_3h": 1.15,
+        "vib_roll_std_3h": 0.05,
     }
-    
+
     response = client.post("/predict", json=payload)
-    assert response.status_code == 200, f"Détail de l'erreur FastAPI (422) : {response.json()}"
+    assert response.status_code == 200, (
+        f"Détail de l'erreur FastAPI ({response.status_code}) : {response.json()}"
+    )

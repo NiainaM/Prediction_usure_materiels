@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  maintenance-predictive-api:
+    build: .
+    container_name: maintenance_predictive_api
+    ports:
+      - "8000:8000"
+    restart: always
